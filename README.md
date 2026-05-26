@@ -2,9 +2,9 @@
 
 ### Transforming Community Discussions into Actionable Product Intelligence using Local LLMs
 
-🚀 **Live Demo:** [Add Streamlit URL Here]
+🚀 **Live Demo:** https://voice-of-customer-ai-agent.streamlit.app/
 
-📂 **GitHub Repository:** [Add GitHub URL Here]
+📂 **GitHub Repository:** https://github.com/yashodharhajare-wq/voice-of-customer-ai-agent
 
 ---
 
