@@ -376,23 +376,23 @@ Displays:
 
 Completed:
 
-✅ Dataset inspection
+Dataset inspection
 
-✅ Discussion grouping
+Discussion grouping
 
-✅ Classifier
+Classifier
 
-✅ Extractor
+Extractor
 
-✅ Theme normalization
+Theme normalization
 
-✅ Insight aggregation
+Insight aggregation
 
-✅ Dashboard MVP
+Dashboard MVP
 
-✅ Discussion Explorer
+Discussion Explorer
 
-✅ Interactive filters
+Interactive filters
 
 ---
 
