@@ -1,4 +1,4 @@
-# Voice of Customer AI Intelligence Platform
+# AI-Agent_Customer-Requirements-Analyst
 
 ### Transforming reddit Community Discussions into Actionable Product Intelligence using Local LLM model
 
