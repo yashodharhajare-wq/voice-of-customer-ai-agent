@@ -5,6 +5,47 @@ df = pd.read_pickle(
     r"C:\Users\yasho\Desktop\Mechanical Keyboard AI agent\outputs\normalized_insights.pkl"
 )
 
+
+def add_to_counter(counter, items):
+    """
+    Handles:
+    - ["Wireless", "QMK"]
+    - [{"layout": "15 Units Width"}]
+    - mixed lists
+    """
+
+    if not items:
+        return
+
+    for item in items:
+
+        # Normal string item
+        if isinstance(item, str):
+            counter[item] += 1
+
+        # Dictionary item
+        elif isinstance(item, dict):
+            for value in item.values():
+
+                if isinstance(value, str):
+                    counter[value] += 1
+
+                elif isinstance(value, list):
+                    for v in value:
+                        if isinstance(v, str):
+                            counter[v] += 1
+
+        # List item
+        elif isinstance(item, list):
+            for v in item:
+                if isinstance(v, str):
+                    counter[v] += 1
+
+        # Fallback
+        else:
+            counter[str(item)] += 1
+
+
 pain_point_counter = Counter()
 gain_counter = Counter()
 personas_counter = Counter()
@@ -14,39 +55,51 @@ feature_requests_counter = Counter()
 
 for _, row in df.iterrows():
 
-    for item in row.get("pain_points", []) or []:
-        pain_point_counter[item] += 1
+    add_to_counter(
+        pain_point_counter,
+        row.get("pain_points", [])
+    )
 
-    for item in row.get("gains", []) or []:
-        gain_counter[item] += 1
+    add_to_counter(
+        gain_counter,
+        row.get("gains", [])
+    )
 
-    for item in row.get("personas", []) or []:
-        personas_counter[item] += 1
+    add_to_counter(
+        personas_counter,
+        row.get("personas", [])
+    )
 
-    for item in row.get("must_have_features", []) or []:
-        must_have_features_counter[item] += 1
+    add_to_counter(
+        must_have_features_counter,
+        row.get("must_have_features", [])
+    )
 
-    for item in row.get("nice_to_have_features", []) or []:
-        nice_to_have_features_counter[item] += 1
+    add_to_counter(
+        nice_to_have_features_counter,
+        row.get("nice_to_have_features", [])
+    )
 
-    for item in row.get("feature_requests", []) or []:
-        feature_requests_counter[item] += 1
+    add_to_counter(
+        feature_requests_counter,
+        row.get("feature_requests", [])
+    )
 
 print("Total discussions:", len(df))
 
 print(
     "Discussions with pain points:",
-    (df["pain_points"].apply(len) > 0).sum()
+    (df["pain_points"].apply(lambda x: len(x) if isinstance(x, list) else 0) > 0).sum()
 )
 
 print(
     "Discussions with gains:",
-    (df["gains"].apply(len) > 0).sum()
+    (df["gains"].apply(lambda x: len(x) if isinstance(x, list) else 0) > 0).sum()
 )
 
 print(
     "Discussions with feature requests:",
-    (df["feature_requests"].apply(len) > 0).sum()
+    (df["feature_requests"].apply(lambda x: len(x) if isinstance(x, list) else 0) > 0).sum()
 )
 
 print("\nTOP PAIN POINTS\n")
